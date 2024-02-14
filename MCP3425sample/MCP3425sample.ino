@@ -3,7 +3,7 @@
 
 const byte MCP3425_config = 0B10011000;
 
-float MCP3425_out(byte);
+double MCP3425_out(byte);
 
 void setup()
 {
@@ -27,12 +27,12 @@ void loop()
   delay(1000);
 }
 
-float MCP3425_out(byte)
+double MCP3425_out(byte)
 {
   byte data1 = 0;
   byte data2 = 0;
   int result;
-  float voltage;
+  double voltage;
   Wire.requestFrom(MCP3425_addr, 2);
   while (Wire.available())
   {
