@@ -23,7 +23,7 @@ void loop()
 {
   double voltage = MCP3425_out(MCP3425_config);
   Serial.print("Voltage: ");
-  Serial.println(String(voltage, 6s));
+  Serial.println(String(voltage, 6));
   delay(1000);
 }
 
