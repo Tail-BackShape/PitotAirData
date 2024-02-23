@@ -21,9 +21,9 @@ void setup()
 
 void loop()
 {
-  float voltage = MCP3425_out(MCP3425_config);
+  double voltage = MCP3425_out(MCP3425_config);
   Serial.print("Voltage: ");
-  Serial.println(voltage);
+  Serial.println(String(voltage, 6s));
   delay(1000);
 }
 
@@ -31,7 +31,7 @@ double MCP3425_out(byte)
 {
   byte data1 = 0;
   byte data2 = 0;
-  int result;
+  int MCPout;
   double voltage;
   Wire.requestFrom(MCP3425_addr, 2);
   while (Wire.available())
@@ -39,11 +39,11 @@ double MCP3425_out(byte)
     data1 = Wire.read();
     data2 = Wire.read();
   }
-  result = (data1 << 8) | data2;
-  if (result > 32767)
+  MCPout = (data1 << 8) | data2;
+  if (MCPout > 32767)
   {
-    result = result - 65536;
+    MCPout -= 65536;
   }
-  voltage = (result * 2.048) / 32768;
+  voltage = (MCPout * 2.048) / 32768;
   return voltage;
 }
